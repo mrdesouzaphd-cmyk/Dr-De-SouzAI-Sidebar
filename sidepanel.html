@@ -2,21 +2,57 @@
 <html>
 <head>
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f4f4f9; }
-    h2 { color: #2c3e50; font-size: 1.2em; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-    .btn { background: #3498db; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; margin-top: 20px; font-weight: bold; }
+    body { font-family: 'Segoe UI', sans-serif; padding: 15px; background: #f8f9fa; color: #212529; }
+    .header { border-bottom: 2px solid #3498db; margin-bottom: 15px; padding-bottom: 8px; text-align: center; }
+    h2 { font-size: 1.1em; margin: 0; color: #2c3e50; }
+    .badge { font-size: 0.7em; background: #3498db; color: white; padding: 2px 6px; border-radius: 10px; vertical-align: middle; }
+    .tagline { font-size: 0.75em; color: #7f8c8d; font-style: italic; margin-top: 4px; }
+    label { font-size: 0.85em; font-weight: bold; display: block; margin: 12px 0 5px; }
+    select, textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9em; box-sizing: border-box; }
+    textarea { height: 80px; resize: none; }
+    .btn { background: #3498db; color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 15px; transition: 0.3s; }
     .btn:hover { background: #2980b9; }
-    .status { margin-top: 15px; font-size: 0.9em; color: #7f8c8d; }
-    #preview-area { margin-top: 20px; border: 2px dashed #bdc3c7; height: 150px; display: flex; align-items: center; justify-content: center; background: #ecf0f1; border-radius: 5px; color: #95a5a6; }
-    .placeholder-image { width: 90%; height: 80%; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; border-radius: 3px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .progress-container { width: 100%; background: #eee; height: 6px; border-radius: 3px; margin-top: 10px; display: none; }
+    .progress-bar { width: 0%; height: 100%; background: #3498db; border-radius: 3px; transition: width 0.1s; }
+    .output-card { margin-top: 20px; background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .output-header { font-size: 0.75em; font-weight: bold; color: #3498db; text-transform: uppercase; margin-bottom: 8px; }
+    #result-text { font-size: 1.2em; font-weight: 800; color: #e74c3c; line-height: 1.4; }
+    table { width: 100%; font-size: 0.8em; border-collapse: collapse; margin-top: 5px; }
+    td, th { border: 1px solid #eee; padding: 5px; text-align: left; }
+    th { background: #3498db; color: white; }
   </style>
 </head>
 <body>
-  <h2>Dr. De SouzAI Architect</h2>
-  <p>Viral Formula: 10-Step Legal Guide</p>
-  <button class="btn" id="gen-thumb">Generate Viral Thumbnail</button>
-  <div id="status" class="status">Ready for next project...</div>
-  <div id="preview-area">Thumbnail Preview</div>
+  <div class="header">
+    <h2>Dr. De SouzAI Architect <span class="badge">PhD/MBA</span></h2>
+    <div class="tagline">v1.2 Skill-Infused System</div>
+  </div>
+
+  <label>Intelligence Protocol</label>
+  <select id="skill-selector">
+    <option value="hook">Viral Hook (Shorten + Synonyms)</option>
+    <option value="translate">Translate (PT / ES / EN)</option>
+    <option value="table">Summarize Specs (Table)</option>
+    <option value="summary">Executive Summary</option>
+    <option value="hype">Hype It Up!</option>
+  </select>
+
+  <label>Input Content (Title or Description)</label>
+  <textarea id="user-input" placeholder="Paste your video title or content here..."></textarea>
+
+  <button class="btn" id="run-skill">Execute Architect Logic</button>
+
+  <div class="progress-container" id="prog-cont">
+    <div class="progress-bar" id="prog-bar"></div>
+  </div>
+
+  <div class="output-card">
+    <div class="output-header" id="output-title">Architected Output</div>
+    <div id="result-area">
+      <span id="result-text">System Ready -- paste content and select a skill above.</span>
+    </div>
+  </div>
+
   <script src="sidepanel.js"></script>
 </body>
 </html>
