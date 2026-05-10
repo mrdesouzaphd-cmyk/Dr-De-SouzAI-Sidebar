@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Dr. De SouzAI Thumbnail Architect",
+  "version": "1.0",
+  "description": "Custom sidebar for Dr. De SouzAI viral branding.",
+  "permissions": ["sidePanel", "activeTab"],
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "action": {
+    "default_title": "Open Sidebar"
+  }
+}
