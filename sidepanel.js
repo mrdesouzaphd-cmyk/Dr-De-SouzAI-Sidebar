@@ -1,4 +1,4 @@
-// Dr. De SouzAI Architect v1.2 - Skill-Infused Logic Engine
+// Dr. De SouzAI Architect v1.2.1 - Skill-Infused Logic Engine (Bug-Fixed)
 
 document.getElementById('run-skill').addEventListener('click', () => {
   const skill = document.getElementById('skill-selector').value;
@@ -36,9 +36,10 @@ function runSkill(skill, input, resultArea) {
   switch (skill) {
 
     case 'hook': {
-      // Viral Hook: Shorten + Synonyms
+      // Viral Hook: Shorten + Synonyms (v1.2.1 - strips punctuation too)
       let hook = input
         .replace(/Microsoft|Word|Tutorial|Guide|Professional|10-Step|How to|Step-by-Step/gi, '')
+        .replace(/[:\-\u2013\u2014]/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -60,14 +61,13 @@ function runSkill(skill, input, resultArea) {
       const hookWords = hook.split(' ').filter(w => w.length > 1).slice(0, 4).join(' ').toUpperCase();
       resultArea.innerHTML =
         '<div style="font-size:1.4em;font-weight:900;color:#e74c3c;text-align:center;padding:10px;">' +
-        hookWords +
+        (hookWords || 'VIRAL HOOK') +
         '</div>' +
         '<p style="font-size:0.75em;color:#7f8c8d;margin-top:8px;">Viral hook generated. Use as thumbnail headline.</p>';
       break;
     }
 
     case 'translate': {
-      // Translation stub - shows target options
       resultArea.innerHTML =
         '<p style="font-size:0.85em;color:#2c3e50;"><strong>Translation Protocol Active</strong></p>' +
         '<p style="font-size:0.8em;">Input detected. Target language options:</p>' +
@@ -81,8 +81,7 @@ function runSkill(skill, input, resultArea) {
     }
 
     case 'table': {
-      // Summarize as Table - extract key spec pairs
-      const lines = input.split(/[.\n,;]/).filter(l => l.trim().length > 5).slice(0, 6);
+      const lines = input.split(/[.\n,;]/).filter(l => l.trim().length > 5).slice(0, 8);
       let rows = lines.map((line, i) =>
         '<tr><td>' + (i + 1) + '</td><td>' + line.trim() + '</td></tr>'
       ).join('');
@@ -96,26 +95,25 @@ function runSkill(skill, input, resultArea) {
     }
 
     case 'summary': {
-      // Executive Summary - front-load the key idea
       const sentences = input.split(/[.!?]/).filter(s => s.trim().length > 20);
       const core = sentences[0] ? sentences[0].trim() + '.' : input.substring(0, 120) + '...';
       resultArea.innerHTML =
         '<p style="font-size:0.85em;font-weight:bold;color:#2c3e50;">Executive Summary:</p>' +
         '<p style="font-size:0.9em;color:#212529;">' + core + '</p>' +
-        '<p style="font-size:0.75em;color:#7f8c8d;">Word reduction applied. Lead idea extracted.</p>';
+        '<p style="font-size:0.75em;color:#7f8c8d;">Lead idea extracted and front-loaded.</p>';
       break;
     }
 
     case 'hype': {
-      // Hype It Up! - amplify language
+      // v1.2.1 fix: use word boundaries (\b) to avoid matching substrings
       let hyped = input
-        .replace(/good/gi, 'OUTSTANDING')
-        .replace(/better/gi, 'SUPERIOR')
-        .replace(/important/gi, 'CRITICAL')
-        .replace(/useful/gi, 'GAME-CHANGING')
-        .replace(/learn/gi, 'MASTER')
-        .replace(/use/gi, 'UNLEASH')
-        .replace(/help/gi, 'TRANSFORM')
+        .replace(/\bgood\b/gi, 'OUTSTANDING')
+        .replace(/\bbetter\b/gi, 'SUPERIOR')
+        .replace(/\bimportant\b/gi, 'CRITICAL')
+        .replace(/\buseful\b/gi, 'GAME-CHANGING')
+        .replace(/\blearn\b/gi, 'MASTER')
+        .replace(/\buse\b/gi, 'UNLEASH')
+        .replace(/\bhelp\b/gi, 'TRANSFORM')
         .toUpperCase();
       resultArea.innerHTML =
         '<p style="font-size:0.85em;font-weight:bold;color:#e74c3c;">HYPED VERSION:</p>' +
